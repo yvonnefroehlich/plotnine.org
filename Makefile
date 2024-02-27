@@ -30,6 +30,13 @@ help:
 ## Remove Quarto website build files
 clean:
 	rm -rf _site
+	rm -rf images
+	rm -f changelog.qmd
+	rm -f objects.inv
+	rm -f objects.txt
+	rm -f _variables.yml
+	rm -f qrenderer.scss
+	rm -f plotnine.scss
 	cd plotnine/doc && make clean
 
 ## Remove Quarto extensions
@@ -61,12 +68,26 @@ deps:
 ## Build qmd files for plotnine API docs
 api-docs: plotnine-examples pages
 	cd plotnine/doc && make docstrings
-	# Copy all generated files except index.qmd
-	rsync -av plotnine/doc/reference/ ./reference
+	# Copy all relevant files
+	rsync -av plotnine/doc/changelog.qmd .
+	rsync -av plotnine/doc/objects.txt .
+	rsync -av plotnine/doc/objects.inv .
+	rsync -av plotnine/doc/_variables.yml .
+	rsync -av plotnine/doc/images .
+	rsync -av plotnine/doc/reference .
+	rsync -av plotnine/doc/qrenderer.scss .
+	rsync -av plotnine/doc/plotnine.scss .
+
+## Download interlinks
+interlinks:
+	quartodoc interlinks
 
 ## Build website
 site:
 	quarto render
+
+## Build
+fresh-site: clean clean-exts api-docs interlinks site
 
 ## Build website and serve
 preview:

@@ -6,9 +6,11 @@ project:
   resources:
     - objects.inv
   render:
-    - "reference/**.qmd"
-    - "*.qmd"
-    - "tutorials/*.ipynb"
+    # Use / so that we don't accidentally pickup anything in the submodules
+    - "/index.qmd"
+    - "/*.qmd"
+    - "/reference/**.qmd"
+    - "/tutorials/*.ipynb"
 
 website:
   title: "plotnine {{< var version >}}"
@@ -43,7 +45,7 @@ format:
     theme:
       - lumen
       - qrenderer.scss
-      - custom.scss
+      - plotnine.scss
       - website.scss
 
 filters:

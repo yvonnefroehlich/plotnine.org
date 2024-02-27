@@ -1,0 +1,12 @@
+/.quarto/
+/_inv/
+/_site/
+/_extensions/
+/images/
+/examples/
+changelog.qmd
+objects.inv
+objects.txt
+_variables.yml
+plotnine.scss
+qrenderer.scss
