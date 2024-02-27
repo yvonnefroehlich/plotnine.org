@@ -1,0 +1,3 @@
+[submodule "plotnine"]
+	path = plotnine
+	url = git@github.com:has2k1/plotnine.git
