@@ -24,6 +24,14 @@ for line in sys.stdin:
 endef
 export PRINT_HELP_PYSCRIPT
 
+define CHECKOUT_STABLE
+	cd plotnine && \
+	VERSION=$$(git tag | grep -E '^[v]?[0-9]+\.[0-9]+\.[0-9]+$$' | sort -V | tail -n 1) && \
+	git checkout "$$VERSION"
+endef
+export CHECKOUT_STABLE
+
+
 help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
@@ -51,6 +59,18 @@ submodules:
 ## Pull latest commits in git submodules
 submodules-pull:
 	git submodule update --recursive --remote
+
+## Checkout stable (released) version
+checkout-stable:
+	 $(CHECKOUT_STABLE)
+
+## Checkout the main branch
+checkout-main:
+	cd plotnine && git checkout main
+
+## Checkout the dev branch
+checkout-dev:
+	cd plotnine && git checkout dev
 
 ## Setup notebooks from plotnine-examples
 plotnine-examples:
@@ -86,8 +106,8 @@ interlinks:
 site:
 	quarto render
 
-## Build
-fresh-site: clean clean-exts api-docs interlinks site
+## Build website in a new environment
+site-cold: deps api-docs interlinks site
 
 ## Build website and serve
 preview:

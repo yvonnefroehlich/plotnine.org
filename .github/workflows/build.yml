@@ -1,0 +1,59 @@
+name: Build Site
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      ref-branch:
+        description: The branch triggering a build
+        default: dev
+        type: string
+        required: true
+      deploy-branch:
+        description: The branch to deploy the built documentations
+        default: gh-pages
+        type: string
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: pre-release
+
+      - name: Checkout Stable Version
+        if:  inputs.deploy-branch == "stable"
+        shell: bash
+        run: |
+          make checkout-stable
+          push plotnine; echo $(git tag -l --contains HEAD | head -n 1); popd
+
+      - name: Install Dependencies
+        shell: bash
+        run: |
+          make site-fresh
+
+      - name: Environment Information
+        shell: bash
+        run: |
+          ls -la
+
+      - name: Deploy Documentation to a Branch
+        uses: JamesIves/github-pages-deploy-action@v4
+        if: contains(, "true")
+        with:
+          folder: doc/_site
+          branch: ${{ deploy-branch }}
+          commit-message: ${{ github.event.head_commit.message }}
