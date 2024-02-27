@@ -60,17 +60,21 @@ submodules:
 submodules-pull:
 	git submodule update --recursive --remote
 
+submodules-tags:
+	git submodule foreach --recursive 'git fetch --tags'
+
+
 ## Checkout stable (released) version
-checkout-stable:
+checkout-stable: submodules submodules-pull submodules-tags
 	 $(CHECKOUT_STABLE)
 
-## Checkout the main branch
-checkout-main:
+## Checkout the latest on the main branch
+checkout-latest: submodules submodules-pull
 	cd plotnine && git checkout main
 
 ## Checkout the dev branch
-checkout-dev:
-	cd plotnine && git checkout dev
+checkout-dev: submodules submodules-pull
+	cd plotnine && git fetch --depth=1 origin dev && git checkout -b dev
 
 ## Setup notebooks from plotnine-examples
 plotnine-examples:

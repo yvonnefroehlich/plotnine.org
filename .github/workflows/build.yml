@@ -4,20 +4,25 @@ on:
   workflow_dispatch:
   workflow_call:
     inputs:
-      ref-branch:
-        description: The branch triggering a build
-        default: dev
+      deploy-branch:
+        description: "The branch to deploy the built documentations"
+        default: gh-pages
         type: string
         required: true
-      deploy-branch:
-        description: The branch to deploy the built documentations
-        default: gh-pages
+      plotnine-doc-version:
+        # one of (stable, latest, dev)
+        description: "What plotnine API docs to checkout and build"
+        default: stable
         type: string
         required: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.12]
 
     steps:
       - name: Checkout Code
@@ -33,17 +38,16 @@ jobs:
         with:
           version: pre-release
 
-      - name: Checkout Stable Version
-        if:  inputs.deploy-branch == "stable"
+      - name: Checkout Plotnine  Version
         shell: bash
         run: |
-          make checkout-stable
-          push plotnine; echo $(git tag -l --contains HEAD | head -n 1); popd
+          make checkout-${{ inputs.plotnine-doc-version }}
+          pushd plotnine; echo $(git tag -l --contains HEAD | head -n 1); popd
 
       - name: Install Dependencies
         shell: bash
         run: |
-          make site-fresh
+          make site-cold
 
       - name: Environment Information
         shell: bash
@@ -52,8 +56,7 @@ jobs:
 
       - name: Deploy Documentation to a Branch
         uses: JamesIves/github-pages-deploy-action@v4
-        if: contains(, "true")
         with:
           folder: doc/_site
-          branch: ${{ deploy-branch }}
+          branch: ${{ inputs.deploy-branch }}
           commit-message: ${{ github.event.head_commit.message }}
