@@ -44,6 +44,7 @@ format:
       - lumen
       - qrenderer.scss
       - custom.scss
+      - website.scss
 
 filters:
   - interlinks

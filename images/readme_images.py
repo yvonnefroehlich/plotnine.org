@@ -11,9 +11,7 @@ from plotnine import (
 from plotnine.data import mtcars
 
 p1 = (
-    ggplot(mtcars, aes("wt", "mpg"))
-    + geom_point()
-    + theme(figure_size=(6, 4), dpi=300)
+    ggplot(mtcars, aes("wt", "mpg")) + geom_point() + theme(figure_size=(6, 4), dpi=300)
 )
 p1.save("readme-image-1.png")
 

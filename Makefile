@@ -30,7 +30,7 @@ help:
 ## Remove Quarto website build files
 clean:
 	rm -rf _site
-	cd plotnine/docs && make clean
+	cd plotnine/doc && make clean
 
 ## Remove Quarto extensions
 clean-exts:
@@ -45,15 +45,24 @@ submodules:
 submodules-pull:
 	git submodule update --recursive --remote
 
+## Setup notebooks from plotnine-examples
+plotnine-examples:
+	python _plotnine_examples.py
+
+# Create gallery and tutorials pages
+pages: plotnine-examples
+	python gallery/_create.py
+	python tutorials/_create.py
+
 ## Install build dependencies
 deps:
-	cd plotnine/docs && make deps
-	# Copy all generated files except index.qmd
-	rsync -av plotnine/docs/reference/ ./reference
+	cd plotnine/doc && make deps
 
 ## Build qmd files for plotnine API docs
-api-docs:
-	cd plotnine/docs && make docstrings
+api-docs: plotnine-examples pages
+	cd plotnine/doc && make docstrings
+	# Copy all generated files except index.qmd
+	rsync -av plotnine/doc/reference/ ./reference
 
 ## Build website
 site:
