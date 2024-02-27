@@ -10,7 +10,7 @@ import nbformat
 import PIL.Image
 from nbformat.notebooknode import NotebookNode
 from qrenderer._pandoc.blocks import Meta
-from quartodoc.pandoc.blocks import BlockContent, Div
+from quartodoc.pandoc.blocks import Blocks, BlockContent, Div
 from quartodoc.pandoc.components import Attr
 from quartodoc.pandoc.inlines import Image, Link
 
@@ -158,10 +158,10 @@ def render_gallery_page() -> BlockContent:
     """
     Render the gallery page
     """
-    return [
+    return Blocks([
         Meta({"title": "Gallery"}),
         Div(render_gallery_items(), Attr(classes=["column-body-outset"])),
-    ]
+    ])
 
 
 def create_gallery():

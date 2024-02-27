@@ -4,7 +4,7 @@ from pathlib import Path
 import nbformat
 from qrenderer._pandoc.blocks import Meta
 from quartodoc.pandoc.blocks import BulletList
-from quartodoc.pandoc.blocks import BlockContent, Div
+from quartodoc.pandoc.blocks import Blocks, BlockContent, Div
 from quartodoc.pandoc.inlines import Link
 
 THIS_DIR = Path(__file__).parent
@@ -49,10 +49,10 @@ def render_tutorials_page() -> BlockContent:
     """
     Render the gallery page
     """
-    return [
+    return Blocks([
         Meta({"title": "Tutorials"}),
         Div(render_tutorials_items()),
-    ]
+    ])
 
 
 def create_tutorials():
