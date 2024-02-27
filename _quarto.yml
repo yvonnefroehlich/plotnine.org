@@ -6,11 +6,9 @@ project:
   resources:
     - objects.inv
   render:
-    # Use / so that we don't accidentally pickup anything in the submodules
-    - "/index.qmd"
-    - "/*.qmd"
-    - "/reference/**.qmd"
-    - "/tutorials/*.ipynb"
+    - "*.qmd"
+    - "*.ipynb"
+    - "!plotnine"
 
 website:
   title: "plotnine {{< var version >}}"
