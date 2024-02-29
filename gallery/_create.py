@@ -133,7 +133,6 @@ def get_gallery_images_in_notebook(
     """
     Return all gallery images in a notebook
     """
-    print(nb_filepath)
     nb = nbformat.read(nb_filepath.open(), as_version=4)
     nb_cells = nb["cells"]
     notebook_name = nb_filepath.stem
@@ -172,10 +171,7 @@ def get_gallery_images_in_notebook(
         relpath = THUMBNAILS_DIR / f"{notebook_name}-{anchor}.png"
         create_thumbnail(output_node, THIS_DIR / relpath)
         category = m.group("category")
-        print("\t", title)
         yield GalleryImage(relpath, title, target, category)
-
-    print("--------------------------------------------------------------------")
 
 
 def get_gallery_images(
@@ -226,12 +222,12 @@ def render_gallery_items() -> BlockContent:
 
         sections.extend(
             [
-                Header(2, section_title),
+                Header(2, section_title, Attr(classes=["gallery"])),
                 Div(imgs, Attr(classes=["grid"])),
             ]
         )
 
-    return Div(sections, Attr(classes=["gallery"]))
+    return Blocks(sections)
 
 
 def render_gallery_page() -> BlockContent:
@@ -241,7 +237,7 @@ def render_gallery_page() -> BlockContent:
     return Blocks(
         [
             Meta({"title": "Gallery"}),
-            Div(render_gallery_items(), Attr(classes=["column-body-outset"])),
+            render_gallery_items(),
         ]
     )
 
