@@ -74,7 +74,7 @@ class GalleryImage(Block):
         # For a responsive layout, use bootstrap grid classes that select
         # for different screen sizes
         # https://getbootstrap.com/docs/5.3/layout/grid/#grid-options
-        out_cls = "card g-col-12 g-col-sm-6 g-col-md-3 g-col-lg-2"
+        out_cls = "card g-col-12 g-col-sm-6 g-col-md-3"
         in_cls = "card-header"
         res = Div(
             [
