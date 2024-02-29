@@ -14,4 +14,4 @@ jobs:
     with:
       # TODO: Change version to stable after the next release
       plotnine-doc-version: latest
-      deploy-branch: stable
+      deploy-branch: gh-pages
