@@ -133,6 +133,7 @@ def get_gallery_images_in_notebook(
     """
     Return all gallery images in a notebook
     """
+    print(nb_filepath)
     nb = nbformat.read(nb_filepath.open(), as_version=4)
     nb_cells = nb["cells"]
     notebook_name = nb_filepath.stem
@@ -171,7 +172,10 @@ def get_gallery_images_in_notebook(
         relpath = THUMBNAILS_DIR / f"{notebook_name}-{anchor}.png"
         create_thumbnail(output_node, THIS_DIR / relpath)
         category = m.group("category")
+        print("\t", title)
         yield GalleryImage(relpath, title, target, category)
+
+    print("--------------------------------------------------------------------")
 
 
 def get_gallery_images(

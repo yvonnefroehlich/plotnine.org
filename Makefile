@@ -67,29 +67,27 @@ checkout-stable: submodules submodules-pull submodules-tags
 	 $(CHECKOUT_STABLE)
 
 ## Checkout the latest on the main branch
-checkout-latest: submodules submodules-pull
+checkout-latest: submodules submodules-pull submodules-tags
 	cd plotnine && git checkout main
 
 ## Checkout the dev branch
-checkout-dev: submodules submodules-pull
+checkout-dev: submodules submodules-pull submodules-tags
 	cd plotnine && git fetch --depth=1 origin dev && git checkout -b dev
-
-## Setup notebooks from plotnine-examples
-plotnine-examples:
-	python _plotnine_examples.py
-
-# Create gallery and tutorials pages
-pages: plotnine-examples
-	python gallery/_create.py
-	python tutorials/_create.py
 
 ## Install build dependencies
 deps:
 	cd plotnine/doc && make deps
 
-## Build qmd files for plotnine API docs
-api-docs: plotnine-examples pages
+## Setup notebooks from plotnine-examples
+plotnine-examples:
+	python _plotnine_examples.py
+
+## Build plotnine API qmd pages
+api-pages: plotnine-examples
 	cd plotnine/doc && make docstrings
+
+## Copy API artefacts into website
+copy-api-artefacts: api-pages
 	# Copy all relevant files
 	rsync -av plotnine/doc/_extensions .
 	rsync -av plotnine/doc/images .
@@ -105,12 +103,18 @@ api-docs: plotnine-examples pages
 interlinks:
 	quartodoc interlinks
 
+## Build all pages for the website
+pages: copy-api-artefacts
+	# Create gallery and tutorials pages
+	python gallery/_create.py
+	python tutorials/_create.py
+
 ## Build website
-site:
+site: pages
 	quarto render
 
 ## Build website in a new environment
-site-cold: deps api-docs interlinks site
+site-cold: deps interlinks site
 
 ## Build website and serve
 preview:

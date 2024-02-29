@@ -38,13 +38,13 @@ jobs:
         with:
           version: pre-release
 
-      - name: Checkout Plotnine  Version
+      - name: Checkout Plotnine Version
         shell: bash
         run: |
           make checkout-${{ inputs.plotnine-doc-version }}
           pushd plotnine; echo $(git tag -l --contains HEAD | head -n 1); popd
 
-      - name: Install Dependencies
+      - name: Build Site
         shell: bash
         run: |
           make site-cold
