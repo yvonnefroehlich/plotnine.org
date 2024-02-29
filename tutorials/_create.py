@@ -49,10 +49,12 @@ def render_tutorials_page() -> BlockContent:
     """
     Render the gallery page
     """
-    return Blocks([
-        Meta({"title": "Tutorials"}),
-        Div(render_tutorials_items()),
-    ])
+    return Blocks(
+        [
+            Meta({"title": "Tutorials"}),
+            Div(render_tutorials_items()),
+        ]
+    )
 
 
 def create_tutorials():
