@@ -10,6 +10,7 @@ jobs:
     name: Build site for plotnine.org
     uses: ./.github/workflows/build.yml
     with:
-      plotnine-doc-version: stable
+      # TODO: Change version to stable after the next release
+      plotnine-doc-version: latest
       deploy-branch: stable
 
