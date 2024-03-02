@@ -36,14 +36,14 @@ NOTEBOOK_PATHS = [
 # The order here determines order of the sections in
 # the gallery
 section_names = {
-    "points": "Point Plots",
-    "lines": "Line Plots",
-    "areas": "Area Plots",
-    "bars": "Bar Plots",
-    "distributions": "Distribution Plots",
-    "tiles": "Tile Plots",
+    "points": "Scatter Plots",
+    "lines": "Lines and Paths",
+    "bars": "Bar Charts",
+    "distributions": "Distributions",
+    "themesandlabels": "Themes, Scales, and Labels",
+    "tiles": "Tiles",
     "variations": "Variation Plots",
-    "maps": "Map Plots",
+    "maps": "Maps",
     "complex": "Complex Plots",
 }
 
