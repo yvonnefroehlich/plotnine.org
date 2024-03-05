@@ -45,6 +45,7 @@ section_names = {
     "tiles": "Tiles",
     "variations": "Variation Plots",
     "maps": "Maps",
+    "labels": "Look & Feel",
     "themes": "Look & Feel",
     "elaborate": "Elaborate Graphics",
 }
