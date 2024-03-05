@@ -38,13 +38,15 @@ NOTEBOOK_PATHS = [
 section_names = {
     "points": "Scatter Plots",
     "lines": "Lines and Paths",
-    "bars": "Bar Charts",
+    "paths": "Lines and Paths",
+    "areas": "Area Plots",
+    "bars": "Bar Plots",
     "distributions": "Distributions",
-    "themesandlabels": "Themes, Scales, and Labels",
     "tiles": "Tiles",
     "variations": "Variation Plots",
     "maps": "Maps",
-    "complex": "Complex Plots",
+    "themes": "Look & Feel",
+    "elaborate": "Elaborate Graphics",
 }
 
 
@@ -207,12 +209,10 @@ def render_gallery_items() -> BlockContent:
     for img in get_gallery_images(notebooks):
         try:
             section_title = section_names[img.category]
-        except KeyError:
-            # NOTE: Remove this fallback when we are sure
-            # of the categories
-            section_title = f"{img.category.rstrip('s')} Plots"
-            if section_title not in section_images:
-                section_images[section_title] = []
+        except KeyError as err:
+            msg = f"Unknown gallery tag: {img.category}"
+            raise ValueError(msg) from err
+
         section_images[section_title].append(img)
 
     sections: list[Block] = []
