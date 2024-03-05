@@ -76,7 +76,7 @@ checkout-dev: submodules submodules-pull submodules-tags
 
 ## Install build dependencies
 deps:
-	cd plotnine/doc && make deps
+	cd plotnine && make doc-deps
 
 ## Setup notebooks from plotnine-examples
 plotnine-examples:
