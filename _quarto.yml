@@ -9,6 +9,7 @@ project:
     - "*.qmd"
     - "*.ipynb"
     - "!plotnine"
+    - "!plotnine-examples"
 
 website:
   title: "plotnine {{< var version >}}"

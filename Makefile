@@ -1,4 +1,4 @@
-.PHONY: help Makefile
+.PHONY: help Makefile plotnine-examples
 .DEFAULT_GOAL := help
 
 define PRINT_HELP_PYSCRIPT
@@ -60,7 +60,6 @@ submodules-pull:
 
 submodules-tags:
 	git submodule foreach --recursive 'git fetch --tags'
-
 
 ## Checkout stable (released) version
 checkout-stable: submodules submodules-pull submodules-tags

@@ -3,17 +3,26 @@ This script is run by the Makefile before quarto_build
 """
 import hashlib
 import shutil
-from importlib.resources import files as _files
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).parent
-EXAMPLES_DIR = ROOT_DIR / "plotnine/doc/reference/examples"
-TUTORIALS_DIR = ROOT_DIR / "tutorials"
+
+# list of (source, destination) folders
+NOTEBOOK_PATHS = [
+    (
+        ROOT_DIR / "plotnine-examples/plotnine_examples/examples",
+        ROOT_DIR / "plotnine/doc/reference/examples",
+    ),
+    (
+        ROOT_DIR / "plotnine-examples/plotnine_examples/tutorials",
+        ROOT_DIR / "tutorials",
+    ),
+]
 
 
-def copy_examples_and_tutorials():
+def copy_notebooks():
     """
-    Copy the examples & tutorials in plotnine_examples
+    Copy the notebooks in plotnine_examples
     """
 
     # NOTE: To avoid confusing the watcher used by "quarto preview",
@@ -39,9 +48,9 @@ def copy_examples_and_tutorials():
         for dest in set(cur_dest_files).difference(new_dest_files):
             dest.unlink()
 
-    copy(_files("plotnine_examples.examples"), EXAMPLES_DIR)
-    copy(_files("plotnine_examples.tutorials"), TUTORIALS_DIR)
+    for src, dest in NOTEBOOK_PATHS:
+        copy(src, dest)
 
 
 if __name__ == "__main__":
-    copy_examples_and_tutorials()
+    copy_notebooks()

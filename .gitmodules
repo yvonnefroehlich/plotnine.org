@@ -1,3 +1,6 @@
 [submodule "plotnine"]
 	path = plotnine
 	url = https://github.com/has2k1/plotnine.git
+[submodule "plotnine-examples"]
+	path = plotnine-examples
+	url = https://github.com/has2k1/plotnine-examples.git
