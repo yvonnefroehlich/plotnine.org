@@ -46,6 +46,8 @@ format:
       - qrenderer.scss
       - plotnine.scss
       - website.scss
+    include-in-header:
+      file: include-in-header.html
 
 filters:
   - interlinks
