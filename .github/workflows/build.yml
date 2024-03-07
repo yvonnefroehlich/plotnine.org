@@ -42,6 +42,7 @@ jobs:
         shell: bash
         run: |
           make site-cold
+          make redirects
 
       - name: Environment Information
         shell: bash
