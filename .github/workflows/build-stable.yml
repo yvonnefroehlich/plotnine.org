@@ -1,17 +1,16 @@
-name: Website
+name: Build Website
 
 on:
   push:
     branches:
       - main
   repository_dispatch:
-    types: [trigger-workflow]
+    types: [plotnine-release, push-plotnine-examples-main]
+  workflow_dispatch:
 
 jobs:
   build-site:
     name: Build site for plotnine.org
     uses: ./.github/workflows/build.yml
     with:
-      # TODO: Change version to stable after the next release
-      plotnine-doc-version: latest
-      deploy-branch: gh-pages
+      target-folder: ""

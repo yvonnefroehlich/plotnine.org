@@ -9,12 +9,6 @@ on:
         default: gh-pages
         type: string
         required: true
-      plotnine-doc-version:
-        # one of (stable, latest, dev)
-        description: "What plotnine API docs to checkout and build"
-        default: stable
-        type: string
-        required: true
 
 jobs:
   build:
@@ -38,10 +32,10 @@ jobs:
         with:
           version: release
 
-      - name: Checkout Plotnine Version
+      - name: Checkout Plotnine
         shell: bash
         run: |
-          make checkout-${{ inputs.plotnine-doc-version }}
+          make checkout-stable
           pushd plotnine; echo $(git tag -l --contains HEAD | head -n 1); popd
 
       - name: Build Site
@@ -58,5 +52,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: _site
-          branch: ${{ inputs.deploy-branch }}
+          branch: gh-pages
           commit-message: ${{ github.event.head_commit.message }}
+          clean-exclude: CNAME
+          target_folder: ${{ inputs.target-folder }}
