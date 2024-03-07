@@ -115,12 +115,6 @@ site: pages
 ## Build website in a new environment
 site-cold: deps interlinks site
 
-## Create redirects from the old docs
-redirects:
-	mkdir _site/en/
-	ln -s ../.. _site/en/stable
-	ln -s ../.. _site/en/latest
-
 ## Build website and serve
 preview:
 	quarto preview
