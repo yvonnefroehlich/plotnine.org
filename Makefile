@@ -111,6 +111,7 @@ pages: copy-api-artefacts
 ## Build website
 site: pages
 	quarto render
+	touch _site/.nojekyll
 
 ## Build website in a new environment
 site-cold: deps interlinks site
