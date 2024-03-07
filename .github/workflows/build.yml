@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
   workflow_call:
     inputs:
-      deploy-branch:
-        description: "The branch to deploy the built documentations"
-        default: gh-pages
+      target-folder:
+        description: "The folder to deploy the built documentation"
+        default: ""
         type: string
         required: true
 
