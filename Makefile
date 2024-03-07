@@ -24,12 +24,12 @@ for line in sys.stdin:
 endef
 export PRINT_HELP_PYSCRIPT
 
-define CHECKOUT_STABLE
+define CHECKOUT_RELEASE
 	cd plotnine && \
 	VERSION=$$(git tag | grep -E '^[v]?[0-9]+\.[0-9]+\.[0-9]+$$' | sort -V | tail -n 1) && \
 	git checkout "$$VERSION"
 endef
-export CHECKOUT_STABLE
+export CHECKOUT_RELEASE
 
 
 help:
@@ -61,12 +61,12 @@ submodules-pull:
 submodules-tags:
 	git submodule foreach --recursive 'git fetch --tags'
 
-## Checkout stable (released) version
-checkout-stable: submodules submodules-pull submodules-tags
-	 $(CHECKOUT_STABLE)
+## Checkout released version
+checkout-release: submodules submodules-pull submodules-tags
+	 $(CHECKOUT_RELEASE)
 
 ## Checkout the latest on the main branch
-checkout-latest: submodules submodules-pull submodules-tags
+checkout-main: submodules submodules-pull submodules-tags
 	cd plotnine && git checkout main
 
 ## Checkout the dev branch

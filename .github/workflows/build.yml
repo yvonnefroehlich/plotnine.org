@@ -6,7 +6,14 @@ on:
     inputs:
       target-folder:
         description: "The folder to deploy the built documentation"
-        default: ""
+        default: "."
+        type: string
+        required: true
+      plotnine-branch:
+        # one of: release, main, dev
+        # "release" checks out the latest version
+        description: "The branch to checkout"
+        default: release
         type: string
         required: true
 
@@ -35,7 +42,7 @@ jobs:
       - name: Checkout Plotnine
         shell: bash
         run: |
-          make checkout-stable
+          make checkout-${{ inputs.plotnine-branch }}
           pushd plotnine; echo $(git tag -l --contains HEAD | head -n 1); popd
 
       - name: Build Site
@@ -53,7 +60,7 @@ jobs:
         with:
           folder: _site
           branch: gh-pages
-          target_folder: ${{ inputs.target-folder }}
+          target-folder: ${{ inputs.target-folder }}
           commit-message: ${{ github.event.head_commit.message }}
           clean-exclude: |
             CNAME
