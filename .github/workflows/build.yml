@@ -54,6 +54,8 @@ jobs:
         with:
           folder: _site
           branch: gh-pages
-          commit-message: ${{ github.event.head_commit.message }}
-          clean-exclude: [CNAME, en]
           target_folder: ${{ inputs.target-folder }}
+          commit-message: ${{ github.event.head_commit.message }}
+          clean-exclude: |
+            CNAME
+            en
