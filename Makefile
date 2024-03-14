@@ -31,6 +31,12 @@ define CHECKOUT_RELEASE
 endef
 export CHECKOUT_RELEASE
 
+define CHECKOUT_PRE_RELEASE
+	cd plotnine && \
+	VERSION=$$(git tag | grep -E '^[v]?[0-9]+\.[0-9]+\.[0-9]+a[0-9]+$$' | sort -V | tail -n 1) && \
+	git checkout "$$VERSION"
+endef
+export CHECKOUT_PRE_RELEASE
 
 help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
@@ -64,6 +70,10 @@ submodules-tags:
 ## Checkout released version
 checkout-release: submodules submodules-pull submodules-tags
 	 $(CHECKOUT_RELEASE)
+
+## Checkout released version
+checkout-pre-release: submodules submodules-pull submodules-tags
+	 $(CHECKOUT_PRE_RELEASE)
 
 ## Checkout the latest on the main branch
 checkout-main: submodules submodules-pull submodules-tags

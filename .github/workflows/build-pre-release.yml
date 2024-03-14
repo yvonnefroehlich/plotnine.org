@@ -2,7 +2,7 @@ name: Build Dev Website
 
 on:
   repository_dispatch:
-    types: [push-plotnine-main]
+    types: [plotnine-pre-release]
   workflow_dispatch:
 
 jobs:
@@ -10,5 +10,5 @@ jobs:
     name: Build site for plotnine.org
     uses: ./.github/workflows/build.yml
     with:
-      plotnine-branch: main
+      plotnine-branch: pre-release
       target-folder: dev
