@@ -107,6 +107,8 @@ copy-api-artefacts: api-pages
 	rsync -av plotnine/doc/plotnine.scss .
 	rsync -av plotnine/doc/objects.txt .
 	rsync -av plotnine/doc/objects.inv .
+	# Correct
+	python _patch_api_artefacts.py
 
 ## Download interlinks
 interlinks:
