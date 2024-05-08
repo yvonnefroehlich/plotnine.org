@@ -25,7 +25,11 @@ THUMBNAILS_DIR = Path("thumbnails")
 THUMBNAIL_SIZE = (294, 210)
 
 gallery_page = ROOT_DIR / "gallery/index.qmd"
-word_and_dashes_pattern = re.compile(r"[^\w-]")
+sanitize_patterns = [
+    (re.compile(r"[^\w\s]|"), ""),  # keep letters and spaces
+    (re.compile(r"\s+"), " "), # remove double spaces
+    (re.compile(r"[^\w-]"), "-"), # replace spaces with dashes
+]
 GALLERY_RE = re.compile(r"^# Gallery, (?P<category>\w+)$", flags=re.MULTILINE)
 
 NOTEBOOK_PATHS = [
@@ -55,8 +59,10 @@ def sanitize_filename(s: str) -> str:
     """
     Clean strings that we make part of filenames
     """
-    return word_and_dashes_pattern.sub("-", s).lower()
-
+    s = s.lower()
+    for pattern, replacement in sanitize_patterns:
+        s = pattern.sub(replacement, s)
+    return s
 
 @dataclass
 class GalleryImage(Block):
