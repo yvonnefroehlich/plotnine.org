@@ -37,7 +37,7 @@ jobs:
       - name: Install Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
-          version: release
+          version: 1.5.33
 
       - name: Checkout Plotnine
         shell: bash
