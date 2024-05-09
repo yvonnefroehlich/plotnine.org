@@ -1,8 +1,9 @@
-name: Build Website - Dev
+name: Build Website - Web Dev
 
 on:
-  repository_dispatch:
-    types: [push-plotnine-main]
+  push:
+    branches:
+      - dev
   workflow_dispatch:
 
 jobs:
@@ -11,4 +12,4 @@ jobs:
     uses: ./.github/workflows/build.yml
     with:
       plotnine-branch: main
-      target-folder: dev
+      target-folder: webdev

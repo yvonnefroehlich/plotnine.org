@@ -1,4 +1,4 @@
-name: Build Dev Website
+name: Build Website - Dev
 
 on:
   repository_dispatch:
