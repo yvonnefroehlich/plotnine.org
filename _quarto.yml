@@ -38,6 +38,12 @@ website:
     center: |
       Developed by: Hassan Kibirige,
       License: [MIT](/license.html)
+  announcement:
+    icon: bar-chart
+    dismissable: true
+    content: |
+      **[Announcing the 2024 Plotnine Contest](https://posit.co/blog/announcing-the-2024-plotnine-contest/)**
+    position: above-navbar
 
 format:
   html:
