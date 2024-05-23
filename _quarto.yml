@@ -12,7 +12,8 @@ project:
     - "!plotnine-examples"
 
 website:
-  title: "plotnine {{< var version >}}"
+  # title: "plotnine {{< var version >}}"
+  title: "plotnine 0.13.6"
   favicon: "images/favicon.ico"
   page-navigation: true
   navbar:
