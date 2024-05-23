@@ -40,9 +40,10 @@ website:
       License: [MIT](/license.html)
   announcement:
     icon: bar-chart
+    type: info
     dismissable: true
     content: |
-      **[Announcing the 2024 Plotnine Contest](https://posit.co/blog/announcing-the-2024-plotnine-contest/)**
+      [Announcing the 2024 Plotnine Contest](https://posit.co/blog/announcing-the-2024-plotnine-contest/)
     position: above-navbar
 
 format:
