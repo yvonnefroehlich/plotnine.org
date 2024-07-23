@@ -16,6 +16,7 @@ website:
   title: "plotnine 0.13.6"
   favicon: "images/favicon.ico"
   page-navigation: true
+  open-graph: true
   navbar:
     left:
       - file: reference/index.qmd
