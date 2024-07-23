@@ -14,9 +14,10 @@ project:
 website:
   # title: "plotnine {{< var version >}}"
   title: "plotnine 0.13.6"
+  open-graph: true
+  site-url: https://plotnine.org
   favicon: "images/favicon.ico"
   page-navigation: true
-  open-graph: true
   navbar:
     left:
       - file: reference/index.qmd
