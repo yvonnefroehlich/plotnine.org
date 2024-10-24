@@ -16,7 +16,7 @@ website:
   title: "plotnine 0.13.6"
   open-graph: true
   site-url: https://plotnine.org
-  favicon: "images/favicon.ico"
+  favicon: "images/favicon-32x32.png"
   page-navigation: true
   navbar:
     left:
