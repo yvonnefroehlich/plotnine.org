@@ -5,6 +5,7 @@
 /_freeze/
 /images/
 /references/
+/site_libs/
 changelog.qmd
 objects.inv
 objects.txt

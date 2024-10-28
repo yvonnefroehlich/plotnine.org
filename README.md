@@ -1,5 +1,4 @@
-
-This the repository for the [plotnine](https://plotnine.org) website.
+Repository for the [plotnine](https://plotnine.org) website.
 
 Link
 
